@@ -14,13 +14,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/sneakers")
-public class SneakerController {
+@RequestMapping("/events")
+public class EventController {
 
     private final EventService eventService;
     private final ICategoryRepository categoryRepository;
 
-    public SneakerController(EventService eventService, ICategoryRepository categoryRepository) {
+    public EventController(EventService eventService, ICategoryRepository categoryRepository) {
         this.eventService = eventService;
         this.categoryRepository = categoryRepository;
     }
@@ -42,47 +42,27 @@ public class SneakerController {
     }
 
     @GetMapping("category/{id}")
-    public ResponseEntity<List<Event>> findSneakersByCategory(@PathVariable Long id){
-        return ResponseEntity.ok(this.eventService.findSneakersByCategory(id));
+    public ResponseEntity<List<Event>> findEventsByCategory(@PathVariable Long id){
+        return ResponseEntity.ok(this.eventService.findEventsByCategory(id));
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Event> addSneaker(@RequestBody EventRequest request){
-        return ResponseEntity.ok(this.eventService.addSneaker(request));
+        return ResponseEntity.ok(this.eventService.addEvent(request));
     }
 
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         this.eventService.deleteById(id);
     }
 
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     public void editById(@PathVariable Long id, @RequestBody EventRequest changes){
         this.eventService.editById(id, changes);
     }
-
-
-
-
-
-
-
-
-
-/*
-
-    @PutMapping("{id}")
-    public Sneaker updateById(@PathVariable Long id, @RequestBody Sneaker sneaker){
-        return sneakerRepository.updateSneaker(id, sneaker);
-    }
-
-    @GetMapping("search")
-    public List<Sneaker> searchBy(@RequestParam(required = false) String brand){
-        return sneakerRepository.searchBy(brand);
-    }
-    */
-
-
-
 }

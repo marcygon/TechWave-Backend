@@ -32,7 +32,7 @@ public class EventService {
 
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);
-        if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID" + id + " was not found in our database. Please double-check the ID and try again with a valid one.");
+        if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID " + id + " was not found in our database. Please double-check the ID and try again with a valid one.");
         return eventOptional.get();
     }
 
@@ -97,12 +97,16 @@ public class EventService {
         var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("The event you are looking for cannot be found. Please try with a different ID or contact our support team for assistance."));
         var category = categoryRepository.findById(newEvent.getCategoryId()).orElseThrow(() -> new RuntimeException("The requested category was not found. Please try again with a valid category."));
 
+        LocalTime eventHour = LocalTime.parse(newEvent.getEventHour(), DateTimeFormatter.ofPattern("HH:mm"));
+        LocalDate eventDate = LocalDate.parse(newEvent.getEventDate(), DateTimeFormatter.ISO_LOCAL_DATE);
+
         event.setName(newEvent.getName());
         event.setOrganitzer(newEvent.getOrganitzer());
         event.setDescription(newEvent.getDescription());
         event.setHighlights(newEvent.getHighlights());
         event.setLocation(newEvent.getLocation());
-        //event.setEventDateTime(newEvent.getEventDateTime());
+        event.setEventHour(eventHour);
+        event.setEventDate(eventDate);
         event.setCategory(category);
         event.setImg(newEvent.getImg());
         eventRepository.save(event);

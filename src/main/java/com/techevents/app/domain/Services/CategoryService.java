@@ -21,7 +21,7 @@ public class CategoryService {
 
     public Category findCategoryById(Long id){
         var categoryOptional = this.categoryRepository.findById(id);
-        if(categoryOptional.isEmpty()) throw new RuntimeException("The category with id: " + id + " doesn't exist in our Data Base. Please try again with other id.");
+        if(categoryOptional.isEmpty()) throw new RuntimeException("Please be informed that the category with the ID of " + id + " is not available in our database at the moment. Kindly try again with a different ID or reach out to our support team for further assistance.");
         return categoryOptional.get();
     }
 }

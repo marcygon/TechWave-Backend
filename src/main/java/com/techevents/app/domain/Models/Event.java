@@ -1,11 +1,9 @@
 package com.techevents.app.domain.Models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.*;
-import java.time.format.*;
 
 
 @Entity

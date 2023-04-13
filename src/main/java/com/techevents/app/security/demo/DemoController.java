@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sneakers")
+@RequestMapping("/events")
 public class DemoController {
 
   @GetMapping("/admin")

@@ -40,7 +40,7 @@ public class SecurityConfiguration {
               .ignoringRequestMatchers(toH2Console())
               .disable()
               .authorizeHttpRequests()
-              .requestMatchers("/sneakers/auth/**", "/**")
+              .requestMatchers("/events/auth/**", "/**")
               .permitAll()
 
               .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
@@ -55,7 +55,7 @@ public class SecurityConfiguration {
               .authenticationProvider(authenticationProvider)
               .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
               .logout()
-              .logoutUrl("/sneakers/auth/logout")
+              .logoutUrl("/events/auth/logout")
               .addLogoutHandler(logoutHandler)
               .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
       ;

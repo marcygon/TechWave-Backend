@@ -10,10 +10,10 @@ import java.util.List;
 
 @Repository
 public interface IEventRepository extends JpaRepository<Event, Long> {
-    @Query("select s from Sneaker s where s.highlights = true")
+    @Query("select s from Event s where s.highlights = true")
     List<Event> findByHighlightsTrue();
 
-    @Query("select s from Sneaker s where s.category.id = ?1")
+    @Query("select s from Event s where s.category.id = ?1")
     List<Event> findByCategory_Id(@PathVariable Long id);
 
 

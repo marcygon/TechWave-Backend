@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/sneakers")
+@RequestMapping("/events")
 public class AdminController {
 
     private final AdminService adminService;

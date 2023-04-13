@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Repository
-public interface ISneakerRepository extends JpaRepository<Event, Long> {
+public interface IEventRepository extends JpaRepository<Event, Long> {
     @Query("select s from Sneaker s where s.highlights = true")
     List<Event> findByHighlightsTrue();
 

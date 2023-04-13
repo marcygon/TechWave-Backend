@@ -1,10 +1,11 @@
 package com.techevents.app.domain.Models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
+import java.time.*;
+import java.time.format.*;
 
 
 @Entity
@@ -22,9 +23,9 @@ public class Event {
     private Boolean highlights;
     private String img;
     private String location;
+    private LocalDate eventDate;
+    private LocalTime eventHour;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime eventDateTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "admin_id")

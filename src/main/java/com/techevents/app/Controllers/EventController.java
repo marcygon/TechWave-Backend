@@ -52,16 +52,14 @@ public class EventController {
         return ResponseEntity.ok(this.eventService.addEvent(request));
     }
 
-    @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteById(@PathVariable Long id){
         this.eventService.deleteById(id);
     }
 
-    @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void editById(@PathVariable Long id, @RequestBody EventRequest changes){
         this.eventService.editById(id, changes);
     }

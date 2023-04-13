@@ -2,7 +2,10 @@ package com.techevents.app.domain.Dtos;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 @Data
 public class EventRequest {
@@ -12,7 +15,9 @@ public class EventRequest {
     private Boolean highlights;
     private String img;
     private String location;
-    private LocalDateTime eventDateTime;
+    private String eventDate;
+    private String eventHour;
+
     private Long categoryId;
 
 }

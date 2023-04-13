@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 @Service
@@ -56,6 +61,10 @@ public class EventService {
     public Event addEvent(EventRequest request) {
         var category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("This category doesn't exist. Please try again."));
+
+        LocalDate eventDate = LocalDate.parse(request.getEventDate(),DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalTime eventHour = LocalTime.parse(request.getEventHour(),DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+
         var event = new Event();
         var urlDefault = "https://static.thenounproject.com/png/1554489-200.png";
 
@@ -64,13 +73,15 @@ public class EventService {
         event.setDescription(request.getDescription());
         event.setHighlights(request.getHighlights());
         event.setLocation(request.getLocation());
-        event.setEventDateTime(request.getEventDateTime());
         event.setCategory(category);
 
         event.setImg(request.getImg());
         if(validateURL(request.getImg()) == false){
             event.setImg(urlDefault);
         }
+
+        event.setEventDate(eventDate);
+        event.setEventHour(eventHour);
 
         return this.eventRepository.save(event);
     }
@@ -89,7 +100,7 @@ public class EventService {
         event.setDescription(newEvent.getDescription());
         event.setHighlights(newEvent.getHighlights());
         event.setLocation(newEvent.getLocation());
-        event.setEventDateTime(newEvent.getEventDateTime());
+        //event.setEventDateTime(newEvent.getEventDateTime());
         event.setCategory(category);
         event.setImg(newEvent.getImg());
         eventRepository.save(event);

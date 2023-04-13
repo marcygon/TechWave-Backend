@@ -4,12 +4,18 @@ INTO
   categories
   (name)
 VALUES
-  ('Adults');
+  ('social');
 INSERT
 INTO
   categories
   (name)
 VALUES
-  ('Kids');
+  ('presentation');
 
 --events
+INSERT
+INTO
+  events
+  (name, organitzer, `description`, highlights, img, location, event_date, event_hour, category_id)
+VALUES
+  ('test1', 'by tester', 'description', 0, '', 'hola', '2023-04-13', '13:00:00', 1);

@@ -63,7 +63,7 @@ public class EventService {
                 .orElseThrow(() -> new RuntimeException("This category doesn't exist. Please try again."));
 
         LocalDate eventDate = LocalDate.parse(request.getEventDate(),DateTimeFormatter.ISO_LOCAL_DATE);
-        LocalTime eventHour = LocalTime.parse(request.getEventHour(),DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        LocalTime eventHour = LocalTime.parse(request.getEventHour().trim(),DateTimeFormatter.ofPattern("HH:mm:ss"));
 
         var event = new Event();
         var urlDefault = "https://static.thenounproject.com/png/1554489-200.png";

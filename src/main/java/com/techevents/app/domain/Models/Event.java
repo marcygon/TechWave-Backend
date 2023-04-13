@@ -19,6 +19,7 @@ public class Event {
 
     private String name;
     private String organitzer;
+    @Column(name = "description", length = 1000)
     private String description;
     private Boolean highlights;
     private String img;

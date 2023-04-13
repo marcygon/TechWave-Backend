@@ -2,7 +2,7 @@ package com.techevents.app.Controllers;
 
 
 import com.techevents.app.Repositories.ICategoryRepository;
-import com.techevents.app.domain.Dtos.SneakerRequest;
+import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Services.SneakerService;
 //import com.techevents.app.infrastructure.Repositories.ICategoryRepository;
@@ -48,7 +48,7 @@ public class SneakerController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Event> addSneaker(@RequestBody SneakerRequest request){
+    public ResponseEntity<Event> addSneaker(@RequestBody EventRequest request){
         return ResponseEntity.ok(this.sneakerService.addSneaker(request));
     }
 
@@ -58,7 +58,7 @@ public class SneakerController {
     }
 
     @PutMapping("/{id}")
-    public void editById(@PathVariable Long id, @RequestBody SneakerRequest changes){
+    public void editById(@PathVariable Long id, @RequestBody EventRequest changes){
         this.sneakerService.editById(id, changes);
     }
 

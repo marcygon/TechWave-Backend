@@ -1,6 +1,6 @@
 package com.techevents.app.domain.Services;
 
-import com.techevents.app.domain.Dtos.SneakerRequest;
+import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 //import com.techevents.app.infrastructure.Repositories.ICategoryRepository;
 import com.techevents.app.Repositories.ICategoryRepository;
@@ -55,7 +55,7 @@ public class SneakerService {
         return true;
     }
 
-    public Event addSneaker(SneakerRequest request) {
+    public Event addSneaker(EventRequest request) {
         var category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("This category doesn't exist. Please try again."));
         //var admin = this.adminService.getAdminRegistered();
@@ -85,7 +85,7 @@ public class SneakerService {
         this.sneakerRepository.deleteById(sneakerId);
     }
 
-    public void editById(Long sneakerId, SneakerRequest newSneaker){
+    public void editById(Long sneakerId, EventRequest newSneaker){
         //var admin = this.adminService.getAdminRegistered();
         var sneaker = sneakerRepository.findById(sneakerId).orElseThrow(() -> new RuntimeException("Sneaker not found"));
         var category = categoryRepository.findById(newSneaker.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found"));

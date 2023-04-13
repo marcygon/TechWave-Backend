@@ -27,10 +27,15 @@ public class Event {
     private LocalDate eventDate;
     private LocalTime eventHour;
 
+    public boolean isAvailable() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "admin_id")
-    private Admin admin;
+        if (eventDate.isBefore(currentDate) || (eventDate.equals(currentDate) && eventHour.isBefore(currentTime))) {
+            return false;
+        }
+        return true;
+    }
 
     @ManyToOne
     @JoinColumn(name = "category_id")

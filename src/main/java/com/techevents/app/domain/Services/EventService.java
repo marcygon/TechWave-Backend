@@ -28,13 +28,11 @@ public class EventService {
         this.adminService = adminService;
         this.categoryRepository = categoryRepository;
     }
-    public List<Event> findAll(){
-        return this.eventRepository.findAll();
-    }
+    public List<Event> findAll(){ return this.eventRepository.findAll(); }
 
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);
-        if(eventOptional.isEmpty()) throw new RuntimeException("The event with id: " + id + " doesn't exist in our Data Base. Please try again with other id.");
+        if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID" + id + " was not found in our database. Please double-check the ID and try again with a valid one.");
         return eventOptional.get();
     }
 
@@ -60,10 +58,14 @@ public class EventService {
 
     public Event addEvent(EventRequest request) {
         var category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("This category doesn't exist. Please try again."));
+                .orElseThrow(() -> new RuntimeException("We're sorry, the selected category doesn't exist. Please try again with a valid category ID."));
 
         LocalDate eventDate = LocalDate.parse(request.getEventDate(),DateTimeFormatter.ISO_LOCAL_DATE);
-        LocalTime eventHour = LocalTime.parse(request.getEventHour().trim(),DateTimeFormatter.ofPattern("HH:mm:ss"));
+        LocalTime eventHour = LocalTime.parse(request.getEventHour().trim(),DateTimeFormatter.ofPattern("HH:mm"));
+
+        if (eventDate.isBefore(LocalDate.now())) {
+            throw new RuntimeException("We're sorry, but to create a new event the date must be scheduled for a future date. Please select a date that is after today and try again");
+        }
 
         var event = new Event();
         var urlDefault = "https://static.thenounproject.com/png/1554489-200.png";
@@ -92,8 +94,8 @@ public class EventService {
     }
 
     public void editById(Long eventId, EventRequest newEvent){
-        var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Event not found"));
-        var category = categoryRepository.findById(newEvent.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found"));
+        var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("The event you are looking for cannot be found. Please try with a different ID or contact our support team for assistance."));
+        var category = categoryRepository.findById(newEvent.getCategoryId()).orElseThrow(() -> new RuntimeException("The requested category was not found. Please try again with a valid category."));
 
         event.setName(newEvent.getName());
         event.setOrganitzer(newEvent.getOrganitzer());

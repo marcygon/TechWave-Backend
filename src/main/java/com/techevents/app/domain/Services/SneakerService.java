@@ -1,7 +1,7 @@
 package com.techevents.app.domain.Services;
 
 import com.techevents.app.domain.Dtos.SneakerRequest;
-import com.techevents.app.domain.Models.Sneaker;
+import com.techevents.app.domain.Models.Event;
 //import com.techevents.app.infrastructure.Repositories.ICategoryRepository;
 import com.techevents.app.Repositories.ICategoryRepository;
 //import com.techevents.app.infrastructure.Repositories.ISneakerRepository;
@@ -25,22 +25,22 @@ public class SneakerService {
         this.adminService = adminService;
         this.categoryRepository = categoryRepository;
     }
-    public List<Sneaker> findAll(){
+    public List<Event> findAll(){
         return this.sneakerRepository.findAll();
     }
 
-    public Sneaker findById(Long id) {
+    public Event findById(Long id) {
         var sneakerOptional = this.sneakerRepository.findById(id);
         if(sneakerOptional.isEmpty()) throw new RuntimeException("The product with id: " + id + " doesn't exist in our Data Base. Please try again with other id.");
         return sneakerOptional.get();
     }
 
-    public List<Sneaker> findAllHighLights(){
+    public List<Event> findAllHighLights(){
         var sneakers = sneakerRepository.findByHighlightsTrue();
         return sneakers;
     }
 
-    public List<Sneaker> findSneakersByCategory(@PathVariable Long id){
+    public List<Event> findSneakersByCategory(@PathVariable Long id){
         return sneakerRepository.findByCategory_Id(id);
     }
 
@@ -55,11 +55,11 @@ public class SneakerService {
         return true;
     }
 
-    public Sneaker addSneaker(SneakerRequest request) {
+    public Event addSneaker(SneakerRequest request) {
         var category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("This category doesn't exist. Please try again."));
         //var admin = this.adminService.getAdminRegistered();
-        var sneaker = new Sneaker();
+        var sneaker = new Event();
         var urlDefault = "https://static.thenounproject.com/png/1554489-200.png";
 
         sneaker.setBrand(request.getBrand());

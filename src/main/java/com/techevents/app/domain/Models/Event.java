@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.*;
+import java.util.*;
+
 
 
 @Entity
@@ -24,6 +26,8 @@ public class Event {
     private String location;
     private LocalDate eventDate;
     private LocalTime eventHour;
+    private Integer maxParticipants = 15;
+    private Integer participants = 0;
 
     public boolean isAvailable() {
         LocalDate currentDate = LocalDate.now();
@@ -34,7 +38,16 @@ public class Event {
         }
         return true;
     }
+    public boolean registerParticipant() {
+        if (participants < maxParticipants) {
+            participants++;
+            return true;
+        }
+        return false;
+    }
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventRegistration> registrations = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

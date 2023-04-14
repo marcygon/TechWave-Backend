@@ -3,9 +3,7 @@ package com.techevents.app.domain.Services;
 import com.techevents.app.Repositories.IEventRegistrationRepository;
 import com.techevents.app.Repositories.IEventRepository;
 import com.techevents.app.Repositories.IUserRepository;
-import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Models.EventRegistration;
-import com.techevents.app.domain.Models.User;
 import org.springframework.stereotype.Service;
 
 @Service

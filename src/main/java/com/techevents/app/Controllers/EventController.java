@@ -53,7 +53,7 @@ public class EventController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Event> addSneaker(@RequestBody EventRequest request){
+    public ResponseEntity<Event> addEvent(@RequestBody EventRequest request){
         return ResponseEntity.ok(this.eventService.addEvent(request));
     }
 
@@ -67,5 +67,11 @@ public class EventController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void editById(@PathVariable Long id, @RequestBody EventRequest changes){
         this.eventService.editById(id, changes);
+    }
+
+    @PutMapping("/{id}/register")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<Event> addParticipant(@RequestBody String participant, @PathVariable Long event){
+        return ResponseEntity.ok(this.eventService.addParticipant(participant, event));
     }
 }

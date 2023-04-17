@@ -4,6 +4,7 @@ import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.Repositories.ICategoryRepository;
 import com.techevents.app.Repositories.IEventRepository;
+import com.techevents.app.security.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,13 +19,15 @@ public class EventService {
     private final IEventRepository eventRepository;
     private final AdminService adminService;
     private final ICategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
 
 
-    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository) {
+    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository) {
         this.eventRepository = eventRepository;
         this.adminService = adminService;
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
     public List<Event> findAll(){ return this.eventRepository.findAll(); }
 
@@ -44,6 +47,16 @@ public class EventService {
         var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();
 
         return notAvailableEvents;
+    }
+
+    public Event addParticipant(String userLogged, Long eventId){
+        var userAuth = this.userRepository.findByEmail(userLogged).orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
+        var eventSelected = this.eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
+
+        if(userAuth.isEnabled() && eventSelected != null){
+            eventSelected.registerParticipant();
+        }
+        return this.eventRepository.save(eventSelected);
     }
 
     public List<Event> findEventsByCategory(@PathVariable Long id){
@@ -80,7 +93,7 @@ public class EventService {
         event.setDescription(request.getDescription());
         event.setHighlights(request.getHighlights());
         event.setLocation(request.getLocation());
-        //event.setCategory(category);
+        event.setCategory(category);
 
         event.setImg(request.getImg());
         if(validateURL(request.getImg()) == false){
@@ -112,7 +125,7 @@ public class EventService {
         event.setLocation(newEvent.getLocation());
         event.setEventHour(eventHour);
         event.setEventDate(eventDate);
-        //event.setCategory(category);
+        event.setCategory(category);
         event.setImg(newEvent.getImg());
         eventRepository.save(event);
     }

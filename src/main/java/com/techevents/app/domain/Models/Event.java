@@ -46,10 +46,10 @@ public class Event {
         return false;
     }
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EventRegistration> registrations = new ArrayList<>();
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    //@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<EventRegistration> registrations = new ArrayList<>();
+    //@ManyToOne
+    //@JoinColumn(name = "category_id")
+    //private Category category;
 }
 

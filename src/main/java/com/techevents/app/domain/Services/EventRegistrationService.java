@@ -1,23 +1,25 @@
 package com.techevents.app.domain.Services;
 
 import com.techevents.app.Repositories.IEventRegistrationRepository;
-import com.techevents.app.Repositories.IEventRepository;
-import com.techevents.app.Repositories.IUserRepository;
+//import com.techevents.app.Repositories.IEventRepository;
+//import com.techevents.app.Repositories.IUserRepository;
 import com.techevents.app.domain.Models.EventRegistration;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EventRegistrationService {
-    public final IEventRegistrationRepository eventRegistrationRepository;
-    public final IUserRepository userRepository;
-    public final IEventRepository eventRepository;
-
+    //public final IEventRegistrationRepository eventRegistrationRepository;
+    //public final IUserRepository userRepository;
+    //public final IEventRepository eventRepository;
+/*
     public EventRegistrationService(IEventRegistrationRepository eventRegistrationRepository, IUserRepository userRepository, IEventRepository eventRepository) {
         this.eventRegistrationRepository = eventRegistrationRepository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
     }
 
+ */
+/*
     public EventRegistration registrationToEvent(Long userId, Long eventId) {
         var user = userRepository.findById(userId).orElse(null);
         var event = eventRepository.findById(eventId).orElse(null);
@@ -43,5 +45,7 @@ public class EventRegistrationService {
         }
         return registration;
     }
+
+ */
 }
 

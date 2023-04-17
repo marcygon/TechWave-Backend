@@ -73,7 +73,7 @@ public class EventService {
         event.setDescription(request.getDescription());
         event.setHighlights(request.getHighlights());
         event.setLocation(request.getLocation());
-        event.setCategory(category);
+        //event.setCategory(category);
 
         event.setImg(request.getImg());
         if(validateURL(request.getImg()) == false){
@@ -105,7 +105,7 @@ public class EventService {
         event.setLocation(newEvent.getLocation());
         event.setEventHour(eventHour);
         event.setEventDate(eventDate);
-        event.setCategory(category);
+        //event.setCategory(category);
         event.setImg(newEvent.getImg());
         eventRepository.save(event);
     }

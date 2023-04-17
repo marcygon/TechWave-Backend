@@ -8,16 +8,21 @@ import lombok.Data;
 @Data
 @Table(name = "eventRegistrations")
 public class EventRegistration {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    //@ManyToOne
+    //@JoinColumn(name = "user_id")
+    //private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
+    //@ManyToOne
+    //@JoinColumn(name = "event_id")
+    //private Event event;
+    
+
 }
+
+ 

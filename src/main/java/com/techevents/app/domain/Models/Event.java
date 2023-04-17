@@ -25,7 +25,7 @@ public class Event {
     private LocalDate eventDate;
     private LocalTime eventHour;
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 

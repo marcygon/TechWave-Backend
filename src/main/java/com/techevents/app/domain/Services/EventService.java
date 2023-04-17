@@ -39,6 +39,13 @@ public class EventService {
         return events;
     }
 
+    public List<Event> findNotAvailableEvents(){
+        var events = eventRepository.findAll();
+        var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();
+
+        return notAvailableEvents;
+    }
+
     public List<Event> findEventsByCategory(@PathVariable Long id){
         return eventRepository.findByCategory_Id(id);
     }

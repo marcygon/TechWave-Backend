@@ -5,7 +5,6 @@ import com.techevents.app.Repositories.ICategoryRepository;
 import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Services.EventService;
-//import com.techevents.app.infrastructure.Repositories.ICategoryRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

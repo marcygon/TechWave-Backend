@@ -6,6 +6,7 @@ import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Services.EventService;
 //import com.techevents.app.infrastructure.Repositories.ICategoryRepository;
+import com.techevents.app.domain.Services.RegisterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,12 @@ public class EventController {
 
     private final EventService eventService;
     private final ICategoryRepository categoryRepository;
+    private final RegisterService registerService;
 
-    public EventController(EventService eventService, ICategoryRepository categoryRepository) {
+    public EventController(EventService eventService, ICategoryRepository categoryRepository, RegisterService registerService) {
         this.eventService = eventService;
         this.categoryRepository = categoryRepository;
+        this.registerService = registerService;
     }
 
 
@@ -76,12 +79,8 @@ public class EventController {
 
     @PostMapping("/{eventId}/register")
     //@PreAuthorize("hasAuthority('USER')")
-    public Long registerToEvent(@PathVariable Long eventId){
-        return eventId;
+    public ResponseEntity registerToEvent(@PathVariable Long eventId){
+        registerService.loggedUserRegisterToEvent(eventId);
+        return ResponseEntity.noContent().build();
     }
-    //public ResponseEntity<Event> registerToEvent(@RequestBody String participant, @PathVariable Long event){
-        //return ResponseEntity.ok(this.eventService.loggedUserRegisterToEvent(participant, event));
-    //}
-
-
 }

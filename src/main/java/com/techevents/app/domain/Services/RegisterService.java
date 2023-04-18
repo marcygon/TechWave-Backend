@@ -20,19 +20,10 @@ public class RegisterService {
 
 
     public void loggedUserRegisterToEvent(Long eventId){
-        new RegisterToEvent();
-    }
-/*
-    public Event loggedUserRegisterToEvent (Long eventId){
-        var userAuth = this.userRepository.findByEmail(userLogged).orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
-        var eventSelected = this.eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
-
-        if(userAuth.isEnabled() && eventSelected != null){
-            eventSelected.registerParticipant();
-        }
-
-        return this.eventRepository.save(eventSelected);
+        var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
+        var auth = authService.getAuthUser().orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
+        var register = new RegisterToEvent(auth, event);
+        registerToEventRepository.save(register);
     }
 
- */
 }

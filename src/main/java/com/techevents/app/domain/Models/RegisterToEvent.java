@@ -28,4 +28,3 @@ public class RegisterToEvent {
     @JoinColumn(name = "event_id")
     private Event event;
 }
-//logica aqui necesito un evento y un usuario autenticado

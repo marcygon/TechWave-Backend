@@ -1,5 +1,7 @@
 package com.techevents.app.domain.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -53,5 +55,15 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @JsonIgnore
+    @OneToMany
+    @JoinColumn(name = "event_id")
+    private List<RegisterToEvent> registersToEvent;
+
+    @JsonProperty
+    public Integer registersCount(){
+        return this.registersToEvent.size();
+    }
 }
 

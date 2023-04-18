@@ -41,6 +41,11 @@ public class EventController {
         return ResponseEntity.ok(this.eventService.findAllHighLights());
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<Event>> findAvailable(){
+        return ResponseEntity.ok(this.eventService.findAvailableEvents());
+    }
+
     @GetMapping("/notAvailable")
     public ResponseEntity<List<Event>> findNotAvailable(){
         return ResponseEntity.ok(this.eventService.findNotAvailableEvents());

@@ -29,7 +29,7 @@ public class Event {
     private Integer maxParticipants = 15;
     private Integer participants = 0;
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 

@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -37,6 +38,19 @@ public class EventService {
     public List<Event> findAllHighLights(){
         var events = eventRepository.findByHighlightsTrue();
         return events;
+    }
+
+    public List<Event> findAvailableEvents(){
+        var events = eventRepository.findAll();
+        var availableEvents = events.stream().filter(event -> event.isAvailable()).toList();
+
+        return availableEvents;
+    }
+    public List<Event> findNotAvailableEvents(){
+        var events = eventRepository.findAll();
+        var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();
+
+        return notAvailableEvents;
     }
 
     public List<Event> findEventsByCategory(@PathVariable Long id){

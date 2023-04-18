@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "registrationsToEvents")
 public class RegisterToEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

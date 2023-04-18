@@ -56,25 +56,6 @@ public class EventService {
         return notAvailableEvents;
     }
 
-    //public Event loggedUserRegisterToEvent(Long eventId){
-
-    //}
-/*
-    public Event loggedUserRegisterToEvent (Long eventId){
-        var userAuth = this.userRepository.findByEmail(userLogged).orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
-        var eventSelected = this.eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
-
-        if(userAuth.isEnabled() && eventSelected != null){
-            eventSelected.registerParticipant();
-        }
-
-        return this.eventRepository.save(eventSelected);
-    }
-
- */
-
-
-
     public List<Event> findEventsByCategory(@PathVariable Long id){
         return eventRepository.findByCategory_Id(id);
     }

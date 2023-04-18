@@ -26,8 +26,11 @@ public class Event {
     private String location;
     private LocalDate eventDate;
     private LocalTime eventHour;
-    private Integer maxParticipants = 15;
-    private Integer participants = 0;
+
+    private Integer maxParticipants;
+
+    //private Integer participants = 0; no tiene sentido esto ya que lo va contando el
+
 
     public Boolean isAvailable() {
         LocalDate currentDate = LocalDate.now();
@@ -38,13 +41,14 @@ public class Event {
         }
         return true;
     }
-    public Boolean registerParticipant() {
-        if (isAvailable() && participants < maxParticipants) {
-            participants++;
-            return true;
-        }
-        return false;
-    }
+
+    //public Boolean registerParticipant() {
+        //if (isAvailable() && participants < maxParticipants) {
+            //participants++;
+            //return true;
+        //}
+        //return false;
+    //}
 
     @ManyToOne
     @JoinColumn(name = "category_id")

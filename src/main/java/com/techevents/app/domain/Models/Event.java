@@ -39,7 +39,7 @@ public class Event {
         return true;
     }
     public Boolean registerParticipant() {
-        if (participants < maxParticipants) {
+        if (isAvailable() && participants < maxParticipants) {
             participants++;
             return true;
         }

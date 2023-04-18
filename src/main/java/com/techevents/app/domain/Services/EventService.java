@@ -63,6 +63,7 @@ public class EventService {
         if(userAuth.isEnabled() && eventSelected != null){
             eventSelected.registerParticipant();
         }
+
         return this.eventRepository.save(eventSelected);
     }
 

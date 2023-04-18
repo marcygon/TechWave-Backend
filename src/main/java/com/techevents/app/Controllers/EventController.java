@@ -75,7 +75,7 @@ public class EventController {
     }
 
     @PutMapping("/{id}/register")
-    @PreAuthorize("hasAuthority('USER')")
+    //@PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Event> addParticipant(@RequestBody String participant, @PathVariable Long event){
         return ResponseEntity.ok(this.eventService.addParticipant(participant, event));
     }

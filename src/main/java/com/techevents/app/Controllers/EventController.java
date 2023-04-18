@@ -74,14 +74,14 @@ public class EventController {
         this.eventService.editById(id, changes);
     }
 
-
-    //auth user
-    /*
-    @PutMapping("/{id}/register")
+    @PostMapping("/{eventId}/register")
     //@PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<Event> addParticipant(@RequestBody String participant, @PathVariable Long event){
-        return ResponseEntity.ok(this.eventService.addParticipant(participant, event));
+    public Long registerToEvent(@PathVariable Long eventId){
+        return eventId;
     }
+    //public ResponseEntity<Event> registerToEvent(@RequestBody String participant, @PathVariable Long event){
+        //return ResponseEntity.ok(this.eventService.loggedUserRegisterToEvent(participant, event));
+    //}
 
-     */
+
 }

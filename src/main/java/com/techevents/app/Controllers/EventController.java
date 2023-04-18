@@ -78,7 +78,7 @@ public class EventController {
     }
 
     @PostMapping("/{eventId}/register")
-    //@PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity registerToEvent(@PathVariable Long eventId){
         registerService.loggedUserRegisterToEvent(eventId);
         return ResponseEntity.noContent().build();

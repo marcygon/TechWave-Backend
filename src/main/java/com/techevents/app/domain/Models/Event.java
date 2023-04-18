@@ -28,10 +28,7 @@ public class Event {
     private String location;
     private LocalDate eventDate;
     private LocalTime eventHour;
-
     private Integer maxParticipants;
-
-    //private Integer participants = 0; no tiene sentido esto ya que lo va contando el
 
 
     public Boolean isAvailable() {

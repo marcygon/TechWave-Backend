@@ -2,6 +2,7 @@ package com.techevents.app.domain.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.techevents.app.security.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -41,17 +42,11 @@ public class Event {
         return true;
     }
 
-    //public Boolean registerParticipant() {
-        //if (isAvailable() && participants < maxParticipants) {
-            //participants++;
-            //return true;
-        //}
-        //return false;
-    //}
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    private Boolean registration;
 
     @JsonIgnore
     @OneToMany
@@ -62,5 +57,15 @@ public class Event {
     public Integer registersCount(){
         return this.registersToEvent.size();
     }
+
+    public Boolean alreadyRegistered(User user) {
+        if(registersToEvent.stream().anyMatch(registerToEvent -> registerToEvent.getUser().equals(user))){
+            this.registration = true;
+            return true;
+        }
+        this.registration = false;
+        return false;
+    }
+
 }
 

@@ -12,7 +12,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -21,16 +20,26 @@ public class EventService {
     private final AdminService adminService;
     private final ICategoryRepository categoryRepository;
     private final UserRepository userRepository;
+    private final AuthService authService;
 
 
 
-    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository) {
+    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository, AuthService authService) {
         this.eventRepository = eventRepository;
         this.adminService = adminService;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
+        this.authService = authService;
     }
-    public List<Event> findAll(){ return this.eventRepository.findAll(); }
+    public List<Event> findAll(){
+        var auth = authService.getAuthUser();
+        var eventList = this.eventRepository.findAll();
+
+        eventList.forEach(event -> {
+            event.alreadyRegistered(auth);
+        });
+        return eventList;
+    }
 
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);

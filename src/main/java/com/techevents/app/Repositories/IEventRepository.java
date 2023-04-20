@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IEventRepository extends JpaRepository<Event, Long> {
@@ -17,8 +18,7 @@ public interface IEventRepository extends JpaRepository<Event, Long> {
     @Query("select s from Event s where s.category.id = ?1")
     List<Event> findByCategory_Id(@PathVariable Long id);
 
-    @Query("select e from Event e where e.name = ?1")
+    @Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%'))")
     List<Event> findEventByName(String name);
-
 
 }

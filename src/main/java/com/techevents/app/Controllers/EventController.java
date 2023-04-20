@@ -31,6 +31,7 @@ public class EventController {
     @GetMapping
     public ResponseEntity<List<Event>> getAll(@RequestParam(name = "name", required = false) String name) {
         List<Event> eventsList;
+
         if(name != null){
             eventsList = eventService.findByName(name);
         }

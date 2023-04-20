@@ -95,7 +95,7 @@ public class EventService {
         var urlDefault = "https://static.thenounproject.com/png/1554489-200.png";
 
         event.setName(request.getName());
-        event.setOrganitzer(request.getOrganitzer());
+        event.setOrganizer(request.getOrganizer());
         event.setDescription(request.getDescription());
         event.setHighlights(request.getHighlights());
         event.setLocation(request.getLocation());
@@ -125,7 +125,7 @@ public class EventService {
         LocalDate eventDate = LocalDate.parse(newEvent.getEventDate(), DateTimeFormatter.ISO_LOCAL_DATE);
 
         event.setName(newEvent.getName());
-        event.setOrganitzer(newEvent.getOrganitzer());
+        event.setOrganizer(newEvent.getOrganizer());
         event.setDescription(newEvent.getDescription());
         event.setHighlights(newEvent.getHighlights());
         event.setLocation(newEvent.getLocation());

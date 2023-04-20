@@ -21,7 +21,7 @@ public class Event {
     private Long id;
 
     private String name;
-    private String organitzer;
+    private String organizer;
     @Column(name = "description", length = 1000)
     private String description;
     private Boolean highlights;

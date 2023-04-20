@@ -4,6 +4,7 @@ import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.Repositories.ICategoryRepository;
 import com.techevents.app.Repositories.IEventRepository;
+import com.techevents.app.security.auth.AuthenticationService;
 import com.techevents.app.security.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,19 +21,19 @@ public class EventService {
     private final AdminService adminService;
     private final ICategoryRepository categoryRepository;
     private final UserRepository userRepository;
-    private final AuthService authService;
+    private final AuthenticationService authenticationService;
 
 
 
-    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository, AuthService authService) {
+    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository, AuthenticationService authenticationService) {
         this.eventRepository = eventRepository;
         this.adminService = adminService;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
-        this.authService = authService;
+        this.authenticationService = authenticationService;
     }
     public List<Event> findAll(){
-        var auth = authService.getAuthUser();
+        var auth = authenticationService.getAuthUser();
         var eventList = this.eventRepository.findAll();
 
         eventList.forEach(event -> {

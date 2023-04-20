@@ -45,10 +45,6 @@ public class EventService {
         return eventRepository.findEventByName(name);
     }
 
-    public List<Event> findHighlightByName(String name){
-        return eventRepository.findHighlightEventByName(name);
-    }
-
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);
         if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID " + id + " was not found in our database. Please double-check the ID and try again with a valid one.");
@@ -58,6 +54,10 @@ public class EventService {
     public List<Event> findAllHighLights(){
         var events = eventRepository.findByHighlightsTrue();
         return events;
+    }
+
+    public List<Event> findHighlightByName(String name){
+        return eventRepository.findHighlightEventByName(name);
     }
 
     public List<Event> findAvailableEvents(){

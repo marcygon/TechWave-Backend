@@ -5,7 +5,7 @@ import com.techevents.app.Repositories.ICategoryRepository;
 import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Services.EventService;
-import com.techevents.app.domain.Services.RegisterToEventService;
+import com.techevents.app.domain.Services.JoinAnEventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +19,9 @@ public class EventController {
 
     private final EventService eventService;
     private final ICategoryRepository categoryRepository;
-    private final RegisterToEventService registerService;
+    private final JoinAnEventService registerService;
 
-    public EventController(EventService eventService, ICategoryRepository categoryRepository, RegisterToEventService registerService) {
+    public EventController(EventService eventService, ICategoryRepository categoryRepository, JoinAnEventService registerService) {
         this.eventService = eventService;
         this.categoryRepository = categoryRepository;
         this.registerService = registerService;
@@ -30,14 +30,7 @@ public class EventController {
 
     @GetMapping
     public ResponseEntity<List<Event>> getAll(@RequestParam(name = "name", required = false) String name) {
-        List<Event> eventsList;
-
-        if(name != null){
-            eventsList = eventService.findByName(name);
-        }
-        else {
-            eventsList = eventService.findAll();
-        }
+        List<Event> eventsList = (name != null) ? eventService.findByName(name) : eventService.findAll();
         return ResponseEntity.ok(eventsList);
     }
 
@@ -48,13 +41,7 @@ public class EventController {
 
     @GetMapping("/highlights")
     public ResponseEntity<List<Event>> findAllHighLights(@RequestParam(name = "name", required = false) String name){
-        List<Event> highlightEventsList;
-        if(name != null){
-            highlightEventsList = eventService.findHighlightByName(name);
-        }
-        else {
-            highlightEventsList = eventService.findAllHighLights();
-        }
+        List<Event> highlightEventsList = (name != null) ? eventService.findHighlightByName(name) : eventService.findAllHighLights();
         return ResponseEntity.ok(highlightEventsList);
     }
 
@@ -91,11 +78,10 @@ public class EventController {
         this.eventService.editById(id, changes);
     }
 
-    @PostMapping("/{eventId}/registerToEvent")
+    @PostMapping("/{eventId}/joinEvent")
     @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity registerToEvent(@PathVariable Long eventId){
+    public ResponseEntity joinAnEvent(@PathVariable Long eventId){
         registerService.loggedUserRegisterToEvent(eventId);
         return ResponseEntity.noContent().build();
-        //.orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
     }
 }

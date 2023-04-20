@@ -25,5 +25,4 @@ public interface IEventRepository extends JpaRepository<Event, Long> {
     List<Event> findHighlightEventByName(String name);
 
 
-
 }

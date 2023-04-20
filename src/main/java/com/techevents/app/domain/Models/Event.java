@@ -47,12 +47,13 @@ public class Event {
     private Category category;
 
     @Transient
+    @JsonIgnore
     private Boolean registration;
 
     @JsonIgnore
     @OneToMany
     @JoinColumn(name = "event_id")
-    private List<RegisterToEvent> registersToEvent;
+    private List<JoinAnEvent> registersToEvent;
 
     @JsonProperty
     public Integer registersCount(){
@@ -60,7 +61,7 @@ public class Event {
     }
 
     public Boolean alreadyRegistered(User user) {
-        if(registersToEvent.stream().anyMatch(registerToEvent -> registerToEvent.getUser().equals(user))){
+        if(registersToEvent.stream().anyMatch(joinAnEvent -> joinAnEvent.getUser().equals(user))){
             this.registration = true;
             return true;
         }

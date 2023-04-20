@@ -1,18 +1,18 @@
 package com.techevents.app.domain.Services;
 
 import com.techevents.app.Repositories.IEventRepository;
-import com.techevents.app.Repositories.IRegisterToEventRepository;
-import com.techevents.app.domain.Models.RegisterToEvent;
+import com.techevents.app.Repositories.IJoinAnEventRepository;
+import com.techevents.app.domain.Models.JoinAnEvent;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterToEventService {
+public class JoinAnEventService {
 
     private final IEventRepository eventRepository;
     private final AuthService authService;
-    private final IRegisterToEventRepository registerToEventRepository;
+    private final IJoinAnEventRepository registerToEventRepository;
 
-    public RegisterToEventService(IEventRepository eventRepository, AuthService authService, IRegisterToEventRepository registerToEventRepository) {
+    public JoinAnEventService(IEventRepository eventRepository, AuthService authService, IJoinAnEventRepository registerToEventRepository) {
         this.eventRepository = eventRepository;
         this.authService = authService;
         this.registerToEventRepository = registerToEventRepository;
@@ -30,7 +30,7 @@ public class RegisterToEventService {
             }
         }
         else if (event.isAvailable() && event.registersCount() < event.getMaxParticipants()){
-            var register = new RegisterToEvent(auth, event);
+            var register = new JoinAnEvent(auth, event);
             registerToEventRepository.save(register);
         }
     }

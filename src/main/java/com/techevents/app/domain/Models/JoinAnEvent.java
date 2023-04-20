@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "registrationsToEvents")
 @NoArgsConstructor
-public class RegisterToEvent {
+public class JoinAnEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public RegisterToEvent(User user, Event event) {
+    public JoinAnEvent(User user, Event event) {
         this.user = user;
         this.event = event;
     }

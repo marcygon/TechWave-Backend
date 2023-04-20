@@ -13,6 +13,7 @@ public class EventRequest {
     private String location;
     private String eventDate;
     private String eventHour;
+
     //private Integer maxParticipants;
     private Long categoryId;
 

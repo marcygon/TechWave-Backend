@@ -46,8 +46,15 @@ public class EventController {
     }
 
     @GetMapping("/highlights")
-    public ResponseEntity<List<Event>> findAllHighLights(){
-        return ResponseEntity.ok(this.eventService.findAllHighLights());
+    public ResponseEntity<List<Event>> findAllHighLights(@RequestParam(name = "name", required = false) String name){
+        List<Event> highlightEventsList;
+        if(name != null){
+            highlightEventsList = eventService.findByName(name);
+        }
+        else {
+            highlightEventsList = eventService.findAllHighLights();
+        }
+        return ResponseEntity.ok(highlightEventsList);
     }
 
     @GetMapping("/available")

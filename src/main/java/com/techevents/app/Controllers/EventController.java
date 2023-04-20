@@ -50,7 +50,7 @@ public class EventController {
     public ResponseEntity<List<Event>> findAllHighLights(@RequestParam(name = "name", required = false) String name){
         List<Event> highlightEventsList;
         if(name != null){
-            highlightEventsList = eventService.findByName(name);
+            highlightEventsList = eventService.findHighlightByName(name);
         }
         else {
             highlightEventsList = eventService.findAllHighLights();

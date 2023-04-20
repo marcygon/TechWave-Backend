@@ -21,4 +21,9 @@ public interface IEventRepository extends JpaRepository<Event, Long> {
     @Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%'))")
     List<Event> findEventByName(String name);
 
+    @Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and e.highlights = true")
+    List<Event> findHighlightEventByName(String name);
+
+
+
 }

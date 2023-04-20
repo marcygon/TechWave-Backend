@@ -17,4 +17,8 @@ public interface IEventRepository extends JpaRepository<Event, Long> {
     @Query("select s from Event s where s.category.id = ?1")
     List<Event> findByCategory_Id(@PathVariable Long id);
 
+    @Query("select e from Event e where e.name = ?1")
+    List<Event> findEventByName(String name);
+
+
 }

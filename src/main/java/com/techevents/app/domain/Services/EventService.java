@@ -41,6 +41,10 @@ public class EventService {
         return eventList;
     }
 
+    public List<Event> findByName(String name){
+        return eventRepository.findEventByName(name);
+    }
+
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);
         if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID " + id + " was not found in our database. Please double-check the ID and try again with a valid one.");

@@ -83,11 +83,13 @@ public class EventController {
         registerService.loggedUserRegisterToEvent(eventId);
         return ResponseEntity.noContent().build();
     }
-
+/*
     @DeleteMapping("/{eventId}/unregister")
     @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity quitFromEvent(@PathVariable Long eventId){
         registerService.loggedUserQuitsFromEvent(eventId);
         return ResponseEntity.noContent().build();
     }
+
+ */
 }

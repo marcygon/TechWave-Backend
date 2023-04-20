@@ -19,6 +19,26 @@ public class RegisterService {
     }
 
 
+    //toggle
+    public void loggedUserRegisterToEvent(Long eventId){
+        var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
+        //.orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
+        var auth = authService.getAuthUser();
+
+        if(event.alreadyRegistered(auth)){
+            var checkRegister = registerToEventRepository.findByUserAndEvent(auth, event);
+            if(checkRegister != null){
+                registerToEventRepository.delete(checkRegister);
+            }
+        }
+        else if (event.isAvailable() && event.registersCount() < event.getMaxParticipants()){
+            var register = new RegisterToEvent(auth, event);
+            registerToEventRepository.save(register);
+        }
+    }
+
+    //por separado
+    /*
     public void loggedUserRegisterToEvent(Long eventId){
         var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
         //.orElseThrow(() -> new RuntimeException("In order to register for this event, you must be logged in to your account."));
@@ -31,7 +51,7 @@ public class RegisterService {
             var register = new RegisterToEvent(auth, event);
             registerToEventRepository.save(register);
         }
-    }
+   }
 
     public void loggedUserQuitsFromEvent(Long eventId){
         var event = eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("We were unable to locate the event with the given ID. Please try again with a different ID."));
@@ -43,7 +63,6 @@ public class RegisterService {
                 registerToEventRepository.delete(register);
             }
         }
-
     }
-
+     */
 }

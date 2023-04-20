@@ -2,21 +2,25 @@ package com.techevents.app.domain.Services;
 
 import com.techevents.app.Repositories.IEventRepository;
 import com.techevents.app.Repositories.IJoinAnEventRepository;
+import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Models.JoinAnEvent;
 import com.techevents.app.security.auth.AuthenticationService;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class JoinAnEventService {
 
     private final IEventRepository eventRepository;
     private final AuthenticationService authenticationService;
-    private final IJoinAnEventRepository registerToEventRepository;
+    private final IJoinAnEventRepository joinAnEventRepository;
 
-    public JoinAnEventService(IEventRepository eventRepository, AuthenticationService authenticationService, IJoinAnEventRepository registerToEventRepository) {
+    public JoinAnEventService(IEventRepository eventRepository, AuthenticationService authenticationService, IJoinAnEventRepository joinAnEventRepository) {
         this.eventRepository = eventRepository;
         this.authenticationService = authenticationService;
-        this.registerToEventRepository = registerToEventRepository;
+        this.joinAnEventRepository = joinAnEventRepository;
     }
 
 
@@ -25,14 +29,26 @@ public class JoinAnEventService {
         var auth = authenticationService.getAuthUser();
 
         if(event.alreadyRegistered(auth)){
-            var checkRegister = registerToEventRepository.findByUserAndEvent(auth, event);
+            var checkRegister = joinAnEventRepository.findByUserAndEvent(auth, event);
             if(checkRegister != null){
-                registerToEventRepository.delete(checkRegister);
+                joinAnEventRepository.delete(checkRegister);
             }
         }
         else if (event.isAvailable() && event.registersCount() < event.getMaxParticipants()){
             var register = new JoinAnEvent(auth, event);
-            registerToEventRepository.save(register);
+            joinAnEventRepository.save(register);
         }
+    }
+
+    public List<Event> loggedUserCheckEventsJoined(){
+        var auth = authenticationService.getAuthUser();
+        var listOfEvents = joinAnEventRepository.eventsJoined(auth);
+
+        List<Event> eventsJoined = new ArrayList<>();
+
+        for (JoinAnEvent joinAnEvent : listOfEvents) {
+            eventsJoined.add(joinAnEvent.getEvent());
+        }
+        return eventsJoined;
     }
 }

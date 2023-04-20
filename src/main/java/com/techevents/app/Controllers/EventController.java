@@ -84,4 +84,11 @@ public class EventController {
         registerService.loggedUserRegisterToEvent(eventId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/joined")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<List<Event>> joinedEvents(){
+        List<Event> eventsJoined = registerService.loggedUserCheckEventsJoined();
+        return ResponseEntity.ok(eventsJoined);
+    }
 }

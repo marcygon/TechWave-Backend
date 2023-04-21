@@ -52,8 +52,9 @@ public class EventController {
     }
 
     @GetMapping("/notAvailable")
-    public ResponseEntity<List<Event>> findNotAvailable(){
-        return ResponseEntity.ok(this.eventService.findNotAvailableEvents());
+    public ResponseEntity<List<Event>> findNotAvailable(@RequestParam(name = "name", required = false) String name){
+        List<Event> notAvailableEventsList = (name != null) ? eventService.filterNotAvailableEventsByName(name) : eventService.findNotAvailableEvents();
+        return ResponseEntity.ok(notAvailableEventsList);
     }
 
     @GetMapping("category/{id}")

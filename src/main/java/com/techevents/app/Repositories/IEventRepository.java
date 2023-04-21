@@ -1,11 +1,15 @@
 package com.techevents.app.Repositories;
 
 import com.techevents.app.domain.Models.Event;
+import jakarta.persistence.NamedNativeQuery;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -22,8 +26,13 @@ public interface IEventRepository extends JpaRepository<Event, Long> {
     @Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and e.highlights = true")
     List<Event> filterHighlightEventsByName(String name);
 
-    //@Query("SELECT e FROM Event e WHERE UPPER(e.name) LIKE UPPER(CONCAT('%', ?1, '%')) AND e.available = true")
-    //@Query(value = "SELECT * FROM Event e WHERE UPPER(e.name) LIKE UPPER(CONCAT('%', ?1, '%')) AND (DATE(e.eventDate) > CURRENT_DATE OR (DATE(e.eventDate) = CURRENT_DATE AND TIME(e.eventHour) > CURRENT_TIME))", nativeQuery = true)
-    @Query(value = "SELECT * FROM Event e WHERE UPPER(e.name) LIKE UPPER(CONCAT('%', ?1, '%')) AND (DATE(e.eventDate) > CURRENT_DATE OR (DATE(e.eventDate) = CURRENT_DATE AND TIME(e.eventHour) > CURRENT_TIME))", nativeQuery = true)
-    List<Event> filterAvailableEventsByName(String name);
+    //@Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and e.available = true")
+    //@Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and e.isAvailable = true")
+    //@Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and e.isAvailable")
+    //@Query("select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and e.stream().filter(event -> event.isAvailable()")
+    //@Query(value = "select e from Event e where upper(e.name) like upper(concat('%', ?1, '%')) and (date(e.eventDate) > current_date or (date(e.eventDate) = current_date and time(e.eventHour) > current_time))", nativeQuery = true)
+    //List<Event> filterAvailableEventsByName(String name);
+
+
+
 }

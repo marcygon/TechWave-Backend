@@ -63,13 +63,25 @@ public class EventService {
         return availableEvents;
     }
 
-    public List<Event> filterAvailableEventsByName(String name){ return eventRepository.filterAvailableEventsByName(name);}
+    public List<Event> filterAvailableEventsByName(String name){
+        var eventsByName = eventRepository.filterAllEventsByName(name);
+        var filterAvailableEvents = eventsByName.stream().filter(event -> event.isAvailable()).toList();
+
+        return filterAvailableEvents;
+    }
 
     public List<Event> findNotAvailableEvents(){
         var events = eventRepository.findAll();
         var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();
 
         return notAvailableEvents;
+    }
+
+    public List<Event> filterNotAvailableEventsByName(String name){
+        var eventsByName = eventRepository.filterAllEventsByName(name);
+        var filterNotAvailableEvents = eventsByName.stream().filter(event -> !event.isAvailable()).toList();
+
+        return filterNotAvailableEvents;
     }
 
     public List<Event> findEventsByCategory(@PathVariable Long id){

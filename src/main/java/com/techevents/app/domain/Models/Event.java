@@ -2,6 +2,7 @@ package com.techevents.app.domain.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.techevents.app.security.user.User;
 import jakarta.persistence.*;
 import lombok.Data;

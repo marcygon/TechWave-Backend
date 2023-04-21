@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 class EventServiceTest {
@@ -46,9 +46,10 @@ class EventServiceTest {
 
         var sut = eventService.findAll();
         assertEquals(allEventsList.size(), sut.size());
+        verify(eventRepository, times(1)).findAll();//spy
     }
 
     @Test
-    void findById() {
+    void filterAllEventsByName_ReturnsOneListOfAllEventsFilteredByName() {
     }
 }

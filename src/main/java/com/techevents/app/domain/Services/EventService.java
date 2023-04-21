@@ -33,17 +33,12 @@ public class EventService {
         this.authenticationService = authenticationService;
     }
     public List<Event> findAll(){
-        var auth = authenticationService.getAuthUser();
         var eventList = this.eventRepository.findAll();
-
-        eventList.forEach(event -> {
-            event.alreadyRegistered(auth);
-        });
         return eventList;
     }
 
-    public List<Event> findByName(String name){
-        return eventRepository.findEventByName(name);
+    public List<Event> filterAllEventsByName(String name){
+        return eventRepository.filterAllEventsByName(name);
     }
 
     public Event findById(Long id) {
@@ -57,8 +52,8 @@ public class EventService {
         return events;
     }
 
-    public List<Event> findHighlightByName(String name){
-        return eventRepository.findHighlightEventByName(name);
+    public List<Event> filterHighlightByName(String name){
+        return eventRepository.filterHighlightEventsByName(name);
     }
 
     public List<Event> findAvailableEvents(){
@@ -67,6 +62,9 @@ public class EventService {
 
         return availableEvents;
     }
+
+    public List<Event> filterAvailableEventsByName(String name){ return eventRepository.filterAvailableEventsByName(name);}
+
     public List<Event> findNotAvailableEvents(){
         var events = eventRepository.findAll();
         var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();

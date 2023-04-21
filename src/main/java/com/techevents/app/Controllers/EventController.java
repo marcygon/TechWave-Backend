@@ -30,7 +30,7 @@ public class EventController {
 
     @GetMapping
     public ResponseEntity<List<Event>> getAll(@RequestParam(name = "name", required = false) String name) {
-        List<Event> eventsList = (name != null) ? eventService.findByName(name) : eventService.findAll();
+        List<Event> eventsList = (name != null) ? eventService.filterAllEventsByName(name) : eventService.findAll();
         return ResponseEntity.ok(eventsList);
     }
 
@@ -41,13 +41,14 @@ public class EventController {
 
     @GetMapping("/highlights")
     public ResponseEntity<List<Event>> findAllHighLights(@RequestParam(name = "name", required = false) String name){
-        List<Event> highlightEventsList = (name != null) ? eventService.findHighlightByName(name) : eventService.findAllHighLights();
+        List<Event> highlightEventsList = (name != null) ? eventService.filterHighlightByName(name) : eventService.findAllHighLights();
         return ResponseEntity.ok(highlightEventsList);
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<Event>> findAvailable(){
-        return ResponseEntity.ok(this.eventService.findAvailableEvents());
+    public ResponseEntity<List<Event>> findAvailable(@RequestParam(name = "name", required = false) String name){
+        List<Event> availableEventsList = (name != null) ? eventService.filterAvailableEventsByName(name) : eventService.findAvailableEvents();
+        return ResponseEntity.ok(availableEventsList);
     }
 
     @GetMapping("/notAvailable")

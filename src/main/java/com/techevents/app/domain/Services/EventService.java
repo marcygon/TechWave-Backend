@@ -32,6 +32,7 @@ public class EventService {
         this.userRepository = userRepository;
         this.authenticationService = authenticationService;
     }
+
     public List<Event> findAll(){
         var eventList = this.eventRepository.findAll();
         return eventList;

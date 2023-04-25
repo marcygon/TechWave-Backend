@@ -45,7 +45,7 @@ The controllers execute previously declared functions in the services. This way,
 
 Once the prerequisites are installed, you can clone the repository from the terminal:
 ```
-git clone https://github.com/CarlosJavierVilla/Api-FullStack-Application.git
+git clone https://github.com/marcygon/techEventsBackEnd.git
 ```
 Finally, you need to run the following command to compile and run the project:
 ```
@@ -111,7 +111,7 @@ Los controladores ejecutan funciones previamente declaradas en los servicios, de
 
 Una vez que estén los requisitos instalados, ya se puede clonar desde la terminal:
 ```
-git clone https://github.com/CarlosJavierVilla/Api-FullStack-Application.git
+git clone git clone https://github.com/marcygon/techEventsBackEnd.git
 ```
 Por último hay que ejecutar el siguiente comando para compilar y ejecutar el proyecto:
 ```

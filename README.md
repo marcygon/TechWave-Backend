@@ -23,8 +23,8 @@ In summary, the Eventia project is a comprehensive and user-friendly platform th
 
 ## :hammer:Prerequisites
 
-- Java 8 o superior instalado en tu sistema.
-- Gradle 6.0 o superior.
+- Java 8 or higher installed on your system.
+- Gradle 6.0  or higher..
  
 ## :white_check_mark:Dependencies
 - Spring Boot 2.5.0
@@ -57,6 +57,8 @@ We recommend running it together with the Front-End. Here is the [link to the re
 ## :bust_in_silhouette:Contributors
 [@marcygon](https://github.com/marcygon)<br>
 [@ItzAle](https://github.com/ItzAle)<br>
+[@Menchu02](https://github.com/Menchu02)<br>
+[@ifadoua2](https://github.com/ifadoua2)<br>
 
 
 <br><br>
@@ -121,3 +123,5 @@ Recomendamos hacerlo en compañía del Front-End, este es el [link al repositori
 ## :bust_in_silhouette:Personas contribuyentes
 [@marcygon](https://github.com/marcygon)<br>
 [@ItzAle](https://github.com/ItzAle)<br>
+[@Menchu02](https://github.com/Menchu02)<br>
+[@ifadoua2](https://github.com/ifadoua2)<br>

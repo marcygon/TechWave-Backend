@@ -16,11 +16,13 @@ public class JoinAnEventService {
     private final IEventRepository eventRepository;
     private final AuthenticationService authenticationService;
     private final IJoinAnEventRepository joinAnEventRepository;
+    private final SendMailService sendMailService;
 
-    public JoinAnEventService(IEventRepository eventRepository, AuthenticationService authenticationService, IJoinAnEventRepository joinAnEventRepository) {
+    public JoinAnEventService(IEventRepository eventRepository, AuthenticationService authenticationService, IJoinAnEventRepository joinAnEventRepository, SendMailService sendMailService) {
         this.eventRepository = eventRepository;
         this.authenticationService = authenticationService;
         this.joinAnEventRepository = joinAnEventRepository;
+        this.sendMailService = sendMailService;
     }
 
 
@@ -36,6 +38,7 @@ public class JoinAnEventService {
         }
         else if (event.isAvailable() && event.registersCount() < event.getMaxParticipants()){
             var register = new JoinAnEvent(auth, event);
+            sendMailService.sendMail(auth.getEmail());
             joinAnEventRepository.save(register);
         }
     }

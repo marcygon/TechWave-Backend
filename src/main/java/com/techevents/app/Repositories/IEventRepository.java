@@ -1,15 +1,11 @@
 package com.techevents.app.Repositories;
 
 import com.techevents.app.domain.Models.Event;
-import jakarta.persistence.NamedNativeQuery;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Repository

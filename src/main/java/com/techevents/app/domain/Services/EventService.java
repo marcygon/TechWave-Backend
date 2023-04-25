@@ -13,6 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -24,7 +25,6 @@ public class EventService {
     private final AuthenticationService authenticationService;
 
 
-
     public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository, AuthenticationService authenticationService) {
         this.eventRepository = eventRepository;
         this.adminService = adminService;
@@ -34,31 +34,43 @@ public class EventService {
     }
     public List<Event> findAll(){
         var eventList = this.eventRepository.findAll();
+        eventList.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
         return eventList;
     }
 
     public List<Event> filterAllEventsByName(String name){
-        return eventRepository.filterAllEventsByName(name);
+        var filteredByName = eventRepository.filterAllEventsByName(name);
+        filteredByName.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return filteredByName;
     }
 
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);
         if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID " + id + " was not found in our database. Please double-check the ID and try again with a valid one.");
+
         return eventOptional.get();
     }
 
     public List<Event> findAllHighLights(){
         var events = eventRepository.findByHighlightsTrue();
+        events.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
         return events;
     }
 
     public List<Event> filterHighlightByName(String name){
-        return eventRepository.filterHighlightEventsByName(name);
+        var highlightByName = eventRepository.filterHighlightEventsByName(name);
+        highlightByName.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return highlightByName;
     }
 
     public List<Event> findAvailableEvents(){
         var events = eventRepository.findAll();
         var availableEvents = events.stream().filter(event -> event.isAvailable()).toList();
+        //availableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
 
         return availableEvents;
     }
@@ -66,6 +78,7 @@ public class EventService {
     public List<Event> filterAvailableEventsByName(String name){
         var eventsByName = eventRepository.filterAllEventsByName(name);
         var filterAvailableEvents = eventsByName.stream().filter(event -> event.isAvailable()).toList();
+        //filterAvailableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
 
         return filterAvailableEvents;
     }
@@ -73,6 +86,7 @@ public class EventService {
     public List<Event> findNotAvailableEvents(){
         var events = eventRepository.findAll();
         var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();
+        //notAvailableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
 
         return notAvailableEvents;
     }
@@ -80,6 +94,7 @@ public class EventService {
     public List<Event> filterNotAvailableEventsByName(String name){
         var eventsByName = eventRepository.filterAllEventsByName(name);
         var filterNotAvailableEvents = eventsByName.stream().filter(event -> !event.isAvailable()).toList();
+        //filterNotAvailableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
 
         return filterNotAvailableEvents;
     }

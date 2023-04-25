@@ -51,7 +51,7 @@ Finally, you need to run the following command to compile and run the project:
 ```
 gradle bootRun
 ```
-We recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/ItzAle/sneakers-app) with the different instructions on how to run it.
+We recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/Menchu02/Tech_events) with the different instructions on how to run it.
 
 
 ## :bust_in_silhouette:Contributors
@@ -117,7 +117,7 @@ Por último hay que ejecutar el siguiente comando para compilar y ejecutar el pr
 ```
 gradle bootRun
 ```
-Recomendamos hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/ItzAle/sneakers-app) con las distintas instruciones de como ejecutarlo.
+Recomendamos hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/Menchu02/Tech_events) con las distintas instruciones de como ejecutarlo.
 
 
 ## :bust_in_silhouette:Personas contribuyentes

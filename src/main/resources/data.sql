@@ -92,10 +92,3 @@ INTO
 VALUES
   ('Technology marathon', 'Eventia', 'A sports event where participants run a race while developing an application or a technological project in real-time. It is an opportunity to combine sports and technology, and to foster creativity and teamwork. Technology marathons can last from one day to one week and are held at similar locations such as innovation centers or universities.', 0, 'https://images.unsplash.com/photo-1528901166007-3784c7dd3653?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', 'Wisconsin', '2023-03-01', '20:00', 15, 5);
 
---registrations to events
-INSERT
-INTO
-  registrations_to_events
-  (user_id, event_id)
-VALUES
-  (2, 1);

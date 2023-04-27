@@ -10,6 +10,7 @@ import com.techevents.app.security.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -83,5 +84,10 @@ public class AuthenticationService {
       token.setRevoked(true);
     });
     tokenRepository.saveAll(validUserTokens);
+  }
+
+  public User getAuthUser(){
+    var userName = SecurityContextHolder.getContext().getAuthentication().getName();
+    return this.repository.findByEmail(userName).get();
   }
 }

@@ -1,5 +1,9 @@
 package com.techevents.app.domain.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.techevents.app.security.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,7 +22,7 @@ public class Event {
     private Long id;
 
     private String name;
-    private String organitzer;
+    private String organizer;
     @Column(name = "description", length = 1000)
     private String description;
     private Boolean highlights;
@@ -26,8 +30,8 @@ public class Event {
     private String location;
     private LocalDate eventDate;
     private LocalTime eventHour;
-    private Integer maxParticipants = 15;
-    private Integer participants = 0;
+    private Integer maxParticipants;
+
 
     public Boolean isAvailable() {
         LocalDate currentDate = LocalDate.now();
@@ -38,16 +42,32 @@ public class Event {
         }
         return true;
     }
-    public boolean registerParticipant() {
-        if (participants < maxParticipants) {
-            participants++;
-            return true;
-        }
-        return false;
-    }
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Transient
+    @JsonIgnore
+    private Boolean registration;
+
+    @JsonIgnore
+    @OneToMany
+    @JoinColumn(name = "event_id")
+    private List<JoinAnEvent> registersToEvent;
+
+    @JsonProperty
+    public Integer registersCount(){
+        return this.registersToEvent.size();
+    }
+
+    public Boolean alreadyRegistered(User user) {
+        if(registersToEvent.stream().anyMatch(joinAnEvent -> joinAnEvent.getUser().equals(user))){
+            this.registration = true;
+            return true;
+        }
+        this.registration = false;
+        return false;
+    }
 }
 

@@ -5,6 +5,9 @@ import com.techevents.app.Repositories.ICategoryRepository;
 import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.domain.Services.EventService;
+
+import com.techevents.app.domain.Services.JoinAnEventService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,16 +21,19 @@ public class EventController {
 
     private final EventService eventService;
     private final ICategoryRepository categoryRepository;
+    private final JoinAnEventService registerService;
 
-    public EventController(EventService eventService, ICategoryRepository categoryRepository) {
+    public EventController(EventService eventService, ICategoryRepository categoryRepository, JoinAnEventService registerService) {
         this.eventService = eventService;
         this.categoryRepository = categoryRepository;
+        this.registerService = registerService;
     }
 
 
     @GetMapping
-    public ResponseEntity<List<Event>> getAll() {
-        return ResponseEntity.ok(this.eventService.findAll());
+    public ResponseEntity<List<Event>> getAll(@RequestParam(name = "name", required = false) String name) {
+        List<Event> eventsList = (name != null) ? eventService.filterAllEventsByName(name) : eventService.findAll();
+        return ResponseEntity.ok(eventsList);
     }
 
     @GetMapping("/{id}")
@@ -36,18 +42,21 @@ public class EventController {
     }
 
     @GetMapping("/highlights")
-    public ResponseEntity<List<Event>> findAllHighLights(){
-        return ResponseEntity.ok(this.eventService.findAllHighLights());
+    public ResponseEntity<List<Event>> findAllHighLights(@RequestParam(name = "name", required = false) String name){
+        List<Event> highlightEventsList = (name != null) ? eventService.filterHighlightByName(name) : eventService.findAllHighLights();
+        return ResponseEntity.ok(highlightEventsList);
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<Event>> findAvailable(){
-        return ResponseEntity.ok(this.eventService.findAvailableEvents());
+    public ResponseEntity<List<Event>> findAvailable(@RequestParam(name = "name", required = false) String name){
+        List<Event> availableEventsList = (name != null) ? eventService.filterAvailableEventsByName(name) : eventService.findAvailableEvents();
+        return ResponseEntity.ok(availableEventsList);
     }
 
     @GetMapping("/notAvailable")
-    public ResponseEntity<List<Event>> findNotAvailable(){
-        return ResponseEntity.ok(this.eventService.findNotAvailableEvents());
+    public ResponseEntity<List<Event>> findNotAvailable(@RequestParam(name = "name", required = false) String name){
+        List<Event> notAvailableEventsList = (name != null) ? eventService.filterNotAvailableEventsByName(name) : eventService.findNotAvailableEvents();
+        return ResponseEntity.ok(notAvailableEventsList);
     }
 
     @GetMapping("category/{id}")
@@ -57,7 +66,7 @@ public class EventController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Event> addSneaker(@RequestBody EventRequest request){
+    public ResponseEntity<Event> addEvent(@RequestBody EventRequest request){
         return ResponseEntity.ok(this.eventService.addEvent(request));
     }
 
@@ -71,5 +80,19 @@ public class EventController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void editById(@PathVariable Long id, @RequestBody EventRequest changes){
         this.eventService.editById(id, changes);
+    }
+
+    @PostMapping("/{eventId}/joinEvent")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity joinAnEvent(@PathVariable Long eventId){
+        registerService.loggedUserRegisterToEvent(eventId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/joined")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<List<Event>> joinedEvents(){
+        List<Event> eventsJoined = registerService.loggedUserCheckEventsJoined();
+        return ResponseEntity.ok(eventsJoined);
     }
 }

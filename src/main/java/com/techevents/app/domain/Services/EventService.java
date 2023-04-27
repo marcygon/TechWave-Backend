@@ -4,6 +4,8 @@ import com.techevents.app.domain.Dtos.EventRequest;
 import com.techevents.app.domain.Models.Event;
 import com.techevents.app.Repositories.ICategoryRepository;
 import com.techevents.app.Repositories.IEventRepository;
+import com.techevents.app.security.auth.AuthenticationService;
+import com.techevents.app.security.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,38 +21,82 @@ public class EventService {
     private final IEventRepository eventRepository;
     private final AdminService adminService;
     private final ICategoryRepository categoryRepository;
+    private final UserRepository userRepository;
+    private final AuthenticationService authenticationService;
 
 
-
-    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository) {
+    public EventService(IEventRepository eventRepository, AdminService adminService, ICategoryRepository categoryRepository, UserRepository userRepository, AuthenticationService authenticationService) {
         this.eventRepository = eventRepository;
         this.adminService = adminService;
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
+        this.authenticationService = authenticationService;
     }
-    public List<Event> findAll(){ return this.eventRepository.findAll(); }
+    public List<Event> findAll(){
+        var eventList = this.eventRepository.findAll();
+        eventList.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return eventList;
+    }
+
+    public List<Event> filterAllEventsByName(String name){
+        var filteredByName = eventRepository.filterAllEventsByName(name);
+        filteredByName.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return filteredByName;
+    }
 
     public Event findById(Long id) {
         var eventOptional = this.eventRepository.findById(id);
         if(eventOptional.isEmpty()) throw new RuntimeException("The event with ID " + id + " was not found in our database. Please double-check the ID and try again with a valid one.");
+
         return eventOptional.get();
     }
 
     public List<Event> findAllHighLights(){
         var events = eventRepository.findByHighlightsTrue();
+        events.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
         return events;
+    }
+
+    public List<Event> filterHighlightByName(String name){
+        var highlightByName = eventRepository.filterHighlightEventsByName(name);
+        highlightByName.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return highlightByName;
     }
 
     public List<Event> findAvailableEvents(){
         var events = eventRepository.findAll();
         var availableEvents = events.stream().filter(event -> event.isAvailable()).toList();
+        //availableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
 
         return availableEvents;
     }
+
+    public List<Event> filterAvailableEventsByName(String name){
+        var eventsByName = eventRepository.filterAllEventsByName(name);
+        var filterAvailableEvents = eventsByName.stream().filter(event -> event.isAvailable()).toList();
+        //filterAvailableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return filterAvailableEvents;
+    }
+
     public List<Event> findNotAvailableEvents(){
         var events = eventRepository.findAll();
         var notAvailableEvents = events.stream().filter(event -> !event.isAvailable()).toList();
+        //notAvailableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
 
         return notAvailableEvents;
+    }
+
+    public List<Event> filterNotAvailableEventsByName(String name){
+        var eventsByName = eventRepository.filterAllEventsByName(name);
+        var filterNotAvailableEvents = eventsByName.stream().filter(event -> !event.isAvailable()).toList();
+        //filterNotAvailableEvents.sort(Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventHour).reversed());
+
+        return filterNotAvailableEvents;
     }
 
     public List<Event> findEventsByCategory(@PathVariable Long id){
@@ -83,7 +129,7 @@ public class EventService {
         var urlDefault = "https://static.thenounproject.com/png/1554489-200.png";
 
         event.setName(request.getName());
-        event.setOrganitzer(request.getOrganitzer());
+        event.setOrganizer(request.getOrganizer());
         event.setDescription(request.getDescription());
         event.setHighlights(request.getHighlights());
         event.setLocation(request.getLocation());
@@ -113,7 +159,7 @@ public class EventService {
         LocalDate eventDate = LocalDate.parse(newEvent.getEventDate(), DateTimeFormatter.ISO_LOCAL_DATE);
 
         event.setName(newEvent.getName());
-        event.setOrganitzer(newEvent.getOrganitzer());
+        event.setOrganizer(newEvent.getOrganizer());
         event.setDescription(newEvent.getDescription());
         event.setHighlights(newEvent.getHighlights());
         event.setLocation(newEvent.getLocation());

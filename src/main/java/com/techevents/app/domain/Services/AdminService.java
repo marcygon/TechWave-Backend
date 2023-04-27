@@ -12,10 +12,6 @@ public class AdminService {
     @Autowired
     private IAdminRepository adminRepository;
 
-    //Admin getAdminRegistered(){
-        //return this.adminRepository.findById(1L).get();
-    //}
-
     public List<Admin> findAllAdmins(){
         return adminRepository.findAll();
     }

@@ -38,7 +38,7 @@ public class JoinAnEventService {
         }
         else if (event.isAvailable() && event.registersCount() < event.getMaxParticipants()){
             var register = new JoinAnEvent(auth, event);
-            sendMailService.sendMail(auth.getEmail());
+            //sendMailService.sendMail(auth.getEmail());
             joinAnEventRepository.save(register);
         }
     }

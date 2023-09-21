@@ -1,7 +1,7 @@
 :uk:
-## Project description: Eventia
+## Project description: TechWave
 
-The **Eventia** project is a digital platform for organizing and publishing events that aims to facilitate the organization and promotion of technology-related events. The platform allows users to register and access detailed information about available events, such as the location, description, date, and time, so they can efficiently plan their attendance.
+The **TechWave** project is a digital platform for organizing and publishing events that aims to facilitate the organization and promotion of technology-related events. The platform allows users to register and access detailed information about available events, such as the location, description, date, and time, so they can efficiently plan their attendance.
 
 ## :rocket:Key features of the platform:
 
@@ -15,7 +15,7 @@ The **Eventia** project is a digital platform for organizing and publishing even
 
 **5. Registered Event List:** Registered users have access to a list of all events they have registered for, allowing them to keep track of the events they will be attending.
 
-In summary, the Eventia project is a comprehensive and user-friendly platform that offers an efficient solution for organizing and promoting technology events. Both organizers and attendees can benefit from the functionalities offered by the platform, making the dissemination and management of technology events easy and effective.
+In summary, the TechWave project is a comprehensive and user-friendly platform that offers an efficient solution for organizing and promoting technology events. Both organizers and attendees can benefit from the functionalities offered by the platform, making the dissemination and management of technology events easy and effective.
 
 <h4 align="center">
 :construction: Project under construction :construction:
@@ -24,7 +24,7 @@ In summary, the Eventia project is a comprehensive and user-friendly platform th
 ## :hammer:Prerequisites
 
 - Java 8 or higher installed on your system.
-- Gradle 6.0  or higher..
+- Gradle 6.0  or higher.
  
 ## :white_check_mark:Dependencies
 - Spring Boot 2.5.0
@@ -54,20 +54,13 @@ gradle bootRun
 We recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/Menchu02/Tech_events) with the different instructions on how to run it.
 
 
-## :bust_in_silhouette:Contributors
-[@marcygon](https://github.com/marcygon)<br>
-[@ItzAle](https://github.com/ItzAle)<br>
-[@Menchu02](https://github.com/Menchu02)<br>
-[@ifadoua2](https://github.com/ifadoua2)<br>
-
-
 <br><br>
 
 
 :es:
-## Descripción del proyecto: Eventia
+## Descripción del proyecto: TechWave
 
-El proyecto **Eventia** es una plataforma digital de organización y publicación de eventos que tiene como objetivo facilitar la organización y promoción de eventos relacionados con la tecnología. La plataforma permite a los usuarios registrarse y acceder a información detallada sobre los eventos disponibles, como la dirección, descripción, fecha y hora, para que puedan planificar su asistencia de manera eficiente.
+El proyecto **TechWave** es una plataforma digital de organización y publicación de eventos que tiene como objetivo facilitar la organización y promoción de eventos relacionados con la tecnología. La plataforma permite a los usuarios registrarse y acceder a información detallada sobre los eventos disponibles, como la dirección, descripción, fecha y hora, para que puedan planificar su asistencia de manera eficiente.
 
 ## :rocket:Características principales de la plataforma:
 
@@ -81,7 +74,7 @@ El proyecto **Eventia** es una plataforma digital de organización y publicació
 
 **5. Lista de eventos registrados:** Los usuarios registrados tienen acceso a una lista de todos los eventos a los que se han registrado, lo que les permite llevar un seguimiento de los eventos a los que asistirán.
 
-En resumen, el proyecto Eventia es una plataforma completa y fácil de usar que ofrece una solución eficiente para la organización y promoción de eventos tecnológicos. Tanto los organizadores como los asistentes pueden beneficiarse de las funcionalidades ofrecidas por la plataforma, lo que facilita la difusión y gestión de eventos tecnológicos de manera eficaz.
+En resumen, el proyecto TechWave es una plataforma completa y fácil de usar que ofrece una solución eficiente para la organización y promoción de eventos tecnológicos. Tanto los organizadores como los asistentes pueden beneficiarse de las funcionalidades ofrecidas por la plataforma, lo que facilita la difusión y gestión de eventos tecnológicos de manera eficaz.
 
 <h4 align="center">
 :construction: Proyecto en construcción :construction:
@@ -118,10 +111,3 @@ Por último hay que ejecutar el siguiente comando para compilar y ejecutar el pr
 gradle bootRun
 ```
 Recomendamos hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/Menchu02/Tech_events) con las distintas instruciones de como ejecutarlo.
-
-
-## :bust_in_silhouette:Personas contribuyentes
-[@marcygon](https://github.com/marcygon)<br>
-[@ItzAle](https://github.com/ItzAle)<br>
-[@Menchu02](https://github.com/Menchu02)<br>
-[@ifadoua2](https://github.com/ifadoua2)<br>

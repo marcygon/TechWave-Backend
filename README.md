@@ -55,7 +55,7 @@ Once it has finished, to access it, you have to go to Google Chrome and in the t
 ```
 http://localhost:8080/events
 ```
-You can also access the H2 console by entering this in the top bar. Use the username 'sa' and the password 'password'
+You can also access the H2 console by entering this in the top bar. Use the username 'sa' and the password 'password'.
 ```
 http://localhost:8080/h2-console
 ```

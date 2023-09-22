@@ -51,9 +51,16 @@ Open the project in IntelliJ IDEA and wait for it to finish loading. Once it's d
 ```
 gradle bootRun
 ```
-Once it has finished, to access it, you have to go to Google Chrome and in the top bar, go to [http://localhost:8080/events](http://localhost:8080/events){:target="_blank"}. You can also access the H2 console by entering [http://localhost:8080/h2-console](http://localhost:8080/h2-console){:target="_blank"}.
+Once it has finished, to access it, you have to go to Google Chrome and in the top bar, go to:
+```
+http://localhost:8080/events
+```
+You can also access the H2 console by entering:
+```
+http://localhost:8080/h2-console
+```
 
-I recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/marcygon/TechWave){:target="_blank"} with the different instructions on how to run it.
+I recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/marcygon/TechWave) with the different instructions on how to run it.
 
 
 <br><br>
@@ -112,6 +119,13 @@ Abre el proyecto en IntelliJ IDEA y espera a que termine de cargar. Una vez que 
 ```
 gradle bootRun
 ```
-Una vez haya terminado, para acceder, debes abrir Google Chrome y en la barra superior, dirigirte a [http://localhost:8080/events](http://localhost:8080/events){:target="_blank"}. También puedes acceder a la H2 console ingresando [http://localhost:8080/h2-console](http://localhost:8080/h2-console){:target="_blank"}.
+Una vez haya terminado, para acceder, debes abrir Google Chrome y en la barra superior, dirigirte a:
+```
+http://localhost:8080/events
+```
+También puedes acceder a la consola H2 escribiendo:
+```
+http://localhost:8080/h2-console
+```
 
-Recomiendo hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/marcygon/TechWave){:target="_blank"} con las distintas instruciones de como ejecutarlo.
+Recomiendo hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/marcygon/TechWave) con las distintas instruciones de como ejecutarlo.

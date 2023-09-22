@@ -45,13 +45,13 @@ The controllers execute previously declared functions in the services. This way,
 
 Once the prerequisites are installed, you can clone the repository from the terminal:
 ```
-git clone https://github.com/marcygon/techEventsBackEnd.git
+git clone https://github.com/marcygon/TechWave-Backend.git
 ```
 Finally, you need to run the following command to compile and run the project:
 ```
 gradle bootRun
 ```
-We recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/Menchu02/Tech_events) with the different instructions on how to run it.
+I recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/Menchu02/Tech_events) with the different instructions on how to run it.
 
 
 <br><br>
@@ -104,10 +104,10 @@ Los controladores ejecutan funciones previamente declaradas en los servicios, de
 
 Una vez que estén los requisitos instalados, ya se puede clonar desde la terminal:
 ```
-git clone git clone https://github.com/marcygon/techEventsBackEnd.git
+git clone git clone https://github.com/marcygon/TechWave-Backend.git
 ```
 Por último hay que ejecutar el siguiente comando para compilar y ejecutar el proyecto:
 ```
 gradle bootRun
 ```
-Recomendamos hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/Menchu02/Tech_events) con las distintas instruciones de como ejecutarlo.
+Recomiendo hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/Menchu02/Tech_events) con las distintas instruciones de como ejecutarlo.

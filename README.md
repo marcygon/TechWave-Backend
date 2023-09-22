@@ -51,7 +51,7 @@ Finally, you need to run the following command to compile and run the project:
 ```
 gradle bootRun
 ```
-I recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/Menchu02/Tech_events) with the different instructions on how to run it.
+I recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/marcygon/TechWave) with the different instructions on how to run it.
 
 
 <br><br>
@@ -110,4 +110,4 @@ Por último hay que ejecutar el siguiente comando para compilar y ejecutar el pr
 ```
 gradle bootRun
 ```
-Recomiendo hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/Menchu02/Tech_events) con las distintas instruciones de como ejecutarlo.
+Recomiendo hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/marcygon/TechWave) con las distintas instruciones de como ejecutarlo.

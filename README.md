@@ -47,10 +47,12 @@ Once the prerequisites are installed, you can clone the repository from the term
 ```
 git clone https://github.com/marcygon/TechWave-Backend.git
 ```
-Finally, you need to run the following command to compile and run the project:
+Open the project in IntelliJ IDEA and wait for it to finish loading. Once it's done, you need to run the following command to compile and run the project:
 ```
 gradle bootRun
 ```
+Once it has finished, to access it, you have to go to Google Chrome and in the top bar, go to [(http://localhost:8080/events)]. You can also access the H2 console by entering [(http://localhost:8080/h2-console)].
+
 I recommend running it together with the Front-End. Here is the [link to the repository](https://github.com/marcygon/TechWave) with the different instructions on how to run it.
 
 
@@ -106,8 +108,10 @@ Una vez que estén los requisitos instalados, ya se puede clonar desde la termin
 ```
 git clone git clone https://github.com/marcygon/TechWave-Backend.git
 ```
-Por último hay que ejecutar el siguiente comando para compilar y ejecutar el proyecto:
+Abre el proyecto en IntelliJ IDEA y espera a que termine de cargar. Una vez que haya terminado, debes ejecutar el siguiente comando para compilar y ejecutar el proyecto:
 ```
 gradle bootRun
 ```
+Una vez haya terminado, para acceder, debes abrir Google Chrome y en la barra superior, dirigirte a [(http://localhost:8080/events)]. También puedes acceder a la consola H2 ingresando [(http://localhost:8080/h2-console)].
+
 Recomiendo hacerlo en compañía del Front-End, este es el [link al repositorio](https://github.com/marcygon/TechWave) con las distintas instruciones de como ejecutarlo.
